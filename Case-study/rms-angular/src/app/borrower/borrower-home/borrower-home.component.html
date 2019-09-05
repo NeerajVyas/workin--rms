@@ -1,0 +1,153 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+      </button>
+      <h1>Risk Management System </h1>
+      <span class="menu-spacer"></span>
+      <div>
+       <!--    
+        <a mat-button [routerLink]="'/accounts'"> View Application Requests </a>
+        <a mat-button [routerLink]="'/create-account'"> Update  </a>
+        <a mat-button [routerLink]="'/contacts'"> Contacts </a>
+        <a mat-button [routerLink]="'/create-contact'"> Create Contact </a>
+        <a mat-button [routerLink]="'/activities'"> Activities </a>
+        <a mat-button [routerLink]="'/create-activity'"> Create Activity </a>
+   -->
+   <span style="font-size: 16px;">  Welcome, <strong> {{currentUserName}} </strong> </span>
+   <button mat-button [matMenuTriggerFor]="menu">
+        <strong>  Borrower </strong>
+        <mat-icon class="material-icons">
+            account_circle
+        </mat-icon>
+    </button>
+   <mat-menu #menu="matMenu">
+   <!--   <button mat-menu-item >User Profile</button> -->
+     <label mat-menu-item> {{currentUserEmail}}  </label>
+     <button  mat-menu-item   routerLink ="/logout"> Logout </button> 
+   </mat-menu>
+     </div>
+     
+    </mat-toolbar-row>
+
+  </mat-toolbar>
+  
+  <mat-sidenav-container>
+        <mat-sidenav #sidenav>
+          <mat-nav-list>
+            
+           
+           <!--  <a mat-list-item [routerLink]="'/accounts'"> View Financial Analyst </a> -->
+            <a mat-list-item routerLink ="/borrower-home">Home</a>
+            <a mat-list-item routerLink ="/lenders-list">Credit Application Form</a>
+           <!--  <a mat-list-item (click)="checkCreditScores()">Check Credit Score</a> -->
+            <a mat-list-item routerLink ="/previous-credit-score">Credit Records</a>
+      
+          </mat-nav-list>
+        
+        </mat-sidenav>
+        <mat-sidenav-content>
+          <div style="height: 92vh;">
+             
+                <mat-grid-list cols="13" rowHeight="100px">
+                    <mat-grid-tile [colspan]=3 [rowspan]=6>
+                      <img src="./../../assets/user.png" height="80%" width="80%" alt="user">
+            
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]=1 [rowspan]=6></mat-grid-tile>
+                    <mat-grid-tile [colspan]=4 [rowspan]=3>
+                      <br>
+                      <mat-card class="example-card" routerLink ="/lenders-list">
+                        <mat-card-header>
+                          <div mat-card-avatar class="example-header-image"></div>
+                          <mat-card-title>Select Lender</mat-card-title>
+                          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                        </mat-card-header>
+                        <div style="text-align: center">
+                        <img src="./../../assets/chooseLender.png" height="40%" width="40%" alt="Applications">
+                        </div>
+                        <mat-card-content>
+                          <p>
+                          View the lenders associated with RMS.  
+                          </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                          <!--    <button mat-button>LIKE</button>
+                          <button mat-button>SHARE</button> -->
+                        </mat-card-actions>
+                      </mat-card>
+                      <br>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]=4 [rowspan]=3>
+                      <mat-card class="example-card" routerLink ="/lenders-list">
+                        <mat-card-header>
+                          <div mat-card-avatar class="example-header-image"></div>
+                          <mat-card-title>Fill Application Form</mat-card-title>
+                          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                        </mat-card-header>
+                        <div style="text-align: center">
+                        <img src="./../../assets/fillform.png" height="40%" width="40%" alt="policy">
+                        </div>
+                        <mat-card-content>
+                          <p>
+                           Fill the application form.
+                          </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                          <!--    <button mat-button>LIKE</button>
+                          <button mat-button>SHARE</button> -->
+                        </mat-card-actions>
+                      </mat-card>
+                    </mat-grid-tile><!-- 
+                    <mat-grid-tile [colspan]=3 [rowspan]=6> -->
+                    <!--     <img src="./../../assets/user.png" height="80%" width="80%" alt="user">
+               --><!-- 
+                      </mat-grid-tile> -->
+                    <mat-grid-tile [colspan]=4 [rowspan]=3>
+                        <mat-card class="example-card" routerLink ="/previous-credit-score">
+                          <mat-card-header>
+                            <div mat-card-avatar class="example-header-image"></div>
+                            <mat-card-title>Check Credit Score</mat-card-title>
+                            <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                          </mat-card-header>
+                          <div style="text-align: center">
+                          <img src="./../../assets/checkscore.png"   height="40%" width="40%"  alt="Applications">
+                          </div>
+                          <mat-card-content>
+                            <p>
+                            View your current credit score.
+                            </p>
+                          </mat-card-content>
+                          <mat-card-actions>
+                            <!--    <button mat-button>LIKE</button>
+                            <button mat-button>SHARE</button> -->
+                          </mat-card-actions>
+                        </mat-card>
+                      </mat-grid-tile>
+                      <mat-grid-tile [colspan]=4 [rowspan]=3>
+                          <mat-card class="example-card" routerLink ="/previous-credit-score" >
+                            <mat-card-header>
+                              <div mat-card-avatar class="example-header-image"></div>
+                              <mat-card-title>Credit Records</mat-card-title>
+                              <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                            </mat-card-header>
+                            <div style="text-align: center">
+                            <img  src="./../../assets/previousrecords.png"  height="40%" width="40%"  alt="Applications">
+                            </div>
+                            <mat-card-content>
+                              <p>
+                                  View your previous credit applications.
+                              </p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                              <!--    <button mat-button>LIKE</button>
+                              <button mat-button>SHARE</button> -->
+                            </mat-card-actions>
+                          </mat-card>
+                        </mat-grid-tile>
+                    <!--  <mat-grid-tile>4</mat-grid-tile> -->
+                  </mat-grid-list>
+          </div>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+

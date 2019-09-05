@@ -1,0 +1,129 @@
+<!--
+    <app-financial-analyst-sidebar></app-financial-analyst-sidebar>
+-->
+
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+      </button>
+      <h1>Risk Management System </h1>
+      <span class="menu-spacer"></span>
+      <div>
+     
+        <span style="font-size: 16px;"> Welcome, <strong> {{currentUserName}} </strong> </span>
+        <button mat-button [matMenuTriggerFor]="menu">
+          <strong> ADMIN </strong>
+          <mat-icon class="material-icons">
+            account_circle
+          </mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <!-- 
+       <button mat-menu-item >User Profile</button> -->
+          <label mat-menu-item> {{currentUserEmail}} </label>
+          <button mat-menu-item routerLink="/logout"> Logout </button>
+        </mat-menu>
+      </div>
+  
+    </mat-toolbar-row>
+  
+  </mat-toolbar>
+  
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+  
+        <a mat-list-item  routerLink="/admin-home"> Home </a>
+        <a mat-list-item  routerLink="/view-active-lenders"> View Active Lenders </a>
+        <a mat-list-item  routerLink="/view-inactive-lenders"> View Inactive Lenders </a>
+        <a mat-list-item  routerLink="/view-active-borrowers"> View Active Borrowers </a>
+        <a mat-list-item  routerLink="/view-inactive-borrowers"> View Inactive Borrowers </a>
+  
+      </mat-nav-list>
+  
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div style="height: 88vh;">
+  
+       
+<mat-card>
+    <div class="mat-elevation-z8" style="text-align: center">
+      <div class="mat-toolbar-tools search-bar">
+  
+  
+        <br>
+        <h4 style="color:#3f51b5"> Inactive Borrowers<mat-icon matTooltip="List of Inactive Borrowers">
+          info
+        </mat-icon>
+  
+        </h4>
+        <br>
+      </div>
+    </div>
+    <br>
+    <div class="mat-elevation-z8">
+  
+      <div class="mat-toolbar-tools search-bar">
+        <button mat-button class="mat-icon-button">
+          <mat-icon>search</mat-icon>
+        </button>
+  
+        <mat-form-field flex>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+      </div>
+  
+      <br>
+      <table mat-table [dataSource]="inactiveBorrowerDataSource" matSort>
+  
+        <ng-container matColumnDef="borrowerId">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Borrower Id </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.borrowerId}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="borrowerName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Borrower's Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.borrowerName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="borrowerEmail">
+          <mat-header-cell *matHeaderCellDef [ngClass]="'customWidthClass'" mat-sort-header> Email </mat-header-cell>
+          <mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'"> {{element.borrowerEmail}}</mat-cell>
+        </ng-container>
+      
+        <ng-container matColumnDef="noOfApplication">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> No. of Applications </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.noOfApplication}} </mat-cell>
+          </ng-container>
+
+        <ng-container matColumnDef="update">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Update Status</mat-header-cell>
+          <mat-cell *matCellDef="let element">  <button mat-raised-button [color]="'activeButton'"
+            (click)="activeBorrower(element.borrowerId)">
+            Activate </button> 
+          </mat-cell>
+        </ng-container>
+  
+  
+  
+        <mat-header-row *matHeaderRowDef="inactiveBorrowerColumns"></mat-header-row>
+
+        <div *ngIf="!rowRed">
+          <mat-row *matRowDef="let row; columns: inactiveBorrowerColumns;"></mat-row>
+          </div>
+          
+          <div *ngIf="rowRed">
+          <mat-row [ngClass]="{'make-red': row.borrowerId == lastlyDeactivated}"  *matRowDef="let row; columns: inactiveBorrowerColumns;"></mat-row>
+          </div>
+          
+      </table>
+       <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator> 
+    </div>
+  </mat-card>
+       
+  
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+
+

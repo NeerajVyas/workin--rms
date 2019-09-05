@@ -1,0 +1,19 @@
+.container {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+about_page .tabs_menu {
+    width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 3px 24px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    margin: -35px auto 35px auto;
+}
+.about_page .tabs_menu {
+   
+
+float: left;
+width: 25%;
+text-align: center;
+padding: 0px 5px;
+}

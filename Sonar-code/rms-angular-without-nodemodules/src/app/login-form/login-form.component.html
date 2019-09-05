@@ -1,0 +1,70 @@
+<app-app-header></app-app-header>
+
+<div class="container">
+  
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+      <br>
+      <br>
+      <mat-card class="example-card">
+        <div class="text-center">
+          <button mat-icon-button routerLink="/Login"><img src="./../../assets/lender-borrower-logo.png" width="100%"
+              height="100%"></button>
+          <br>
+          <strong>Login </strong>
+          <br>
+          <br>
+          <mat-card *ngIf="loginFailed" >
+           <p style="color: red;">Email or password is incorrect </p>
+          </mat-card>
+        </div>
+        <form #loginForm="ngForm" (submit)="loginUser($event)" class="example-form">
+
+
+          <mat-form-field class="example-full-width">
+            <label for="userEmail">Email </label>
+            <input matInput required minlength="5" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" ngModel
+              name="userEmail" type="text" #userEmail="ngModel">
+            <mat-error *ngIf="!userEmail.valid && userEmail.errors.pattern">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="!userEmail.valid && userEmail.errors.required">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <label for="password">Password</label>
+            <input matInput required ngModel name="password" type="password"
+              #password="ngModel">
+            <!-- <mat-error *ngIf="!password.valid && password.errors.minlength ">At least 8 characters are required !
+            </mat-error> -->
+            <mat-error *ngIf="!password.valid && password.errors.required "> Password is required.</mat-error>
+            <!-- <mat-hint *ngIf="password.dirty && password.valid">You can Login now</mat-hint> -->
+          </mat-form-field>
+
+
+           <div class="text-center">
+            <a routerLink="/forgotpassword"> Forgot Password ? </a>
+          </div> 
+          <div class="text-center">
+            <a routerLink="/register-selection"> New User ? </a>
+          </div>
+          <br>
+          <div class="text-center">
+            <button mat-raised-button color="primary" [disabled]="loginForm.form.invalid"> LOGIN </button>
+          </div>
+          <br>
+        </form>
+      </mat-card>
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+
+
+<app-app-footer></app-app-footer>

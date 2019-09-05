@@ -1,0 +1,43 @@
+.menu-spacer {
+    flex: 1 1 auto;
+  }
+
+  .example-card {
+    max-width: 400px;
+  }
+  .example-card-user {
+    width: calc(100% - 120px);
+    height: calc(100% - 120px);
+  /*   width: 30%;
+    height: 100%; */
+  }
+  
+  
+  .example-header-image {
+    background-image: url('./../../../assets/lender-borrower-logo.png');
+    background-size: cover;
+  }
+
+  td{
+    padding:0 20px 0 20px;
+}
+table{
+  width: 100%;
+}
+
+h5 {
+  width: 100%; 
+  text-align: center; 
+  border-bottom: 1px solid lightgrey; 
+  line-height: 0.1em;
+  margin: 10px 0 20px; 
+} 
+
+h5 span { 
+   background:#fff; 
+   padding:0 10px; 
+}
+
+.hover-button:hover{
+  box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.8);
+}

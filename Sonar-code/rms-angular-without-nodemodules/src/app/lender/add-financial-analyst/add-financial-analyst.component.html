@@ -1,0 +1,127 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <h1>Risk Management System </h1>
+    <span class="menu-spacer"></span>
+    <div>
+
+      <span style="font-size: 16px;"> Welcome, <strong> {{currentUserName}} </strong> </span>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <strong> Lender </strong>
+        <mat-icon class="material-icons">
+          account_circle
+        </mat-icon>
+      </button>
+      <mat-menu #menu="matMenu"><!-- 
+        <button mat-menu-item>User Profile</button> -->
+        <label mat-menu-item> {{currentUserEmail}} </label>
+        <button mat-menu-item routerLink="/logout"> Logout </button>
+      </mat-menu>
+    </div>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/lender-home"> Home</a>
+      <a mat-list-item routerLink="/view-credit-app"> Application Requests</a>
+      <a mat-list-item routerLink="/new-policy"> Add Parameter in Policy </a>
+      <a mat-list-item routerLink="/add-policy"> Setup Policy </a>
+      <a mat-list-item routerLink="/view-policy"> View Policy </a>
+      <a mat-list-item routerLink="/add-financial-analyst"> Add Financial Analyst</a>
+      <a mat-list-item routerLink="/view-fa"> View Financial Analyst </a>
+
+    <!--   <a mat-list-item (click)="sidenav.toggle()" mat-list-item>Close</a>
+ -->
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+
+      <div class="container">
+        <br>
+        <div class="row">
+
+          <div class="col-sm-12">
+<mat-card>
+    <div class="mat-elevation-z8" style ="text-align: center" >
+            <div class="mat-toolbar-tools search-bar">
+                
+           
+  <br>
+  <h4 style="color:#3f51b5">Add Financial Analyst
+              <mat-icon matTooltip="Financial Analyst will approve or reject the assigned credit applications.">
+                        info
+                </mat-icon>
+            </h4>
+            <br>
+  
+  
+  
+  
+  </div>
+  </div>
+  
+  <div class="mat-elevation-z8" style ="text-align: center" >
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+          <form class="alert alert" id="addFA-form" (ngSubmit)="onSubmit()" #addFA="ngForm">
+  
+            <mat-form-field class="example-full-width">
+              <label for="username">Financial Analyst Name</label>
+              <input matInput required minlength="6" maxlength="20" ngModel name="username" type="text"
+                #username="ngModel" [(ngModel)]="financialanalyst.userName">
+              <mat-error *ngIf="!username.valid && username.errors.minlength ">At least 6 characters are required !
+              </mat-error>
+              <mat-error *ngIf="!username.valid && username.errors.required "> Username is required.</mat-error>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <label for="userEmail">Email </label>
+              <input matInput required minlength="5" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                [(ngModel)]="financialanalyst.userEmail" ngModel name="userEmail" type="text" #userEmail="ngModel">
+              <mat-error *ngIf="!userEmail.valid && userEmail.errors.pattern">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="!userEmail.valid && userEmail.errors.required">
+                Email is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <label for="password">Password</label>
+              <input matInput required minlength="8" maxlength="20" ngModel name="password" type="password" pattern="^(?=[a-zA-Z0-9#@$?]{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9]).*"
+                #password="ngModel" [(ngModel)]="financialanalyst.userPassword">
+              <mat-error *ngIf="!password.valid && password.errors.minlength ">At least 8 characters are required !
+              </mat-error>
+              <mat-error *ngIf="!password.valid && password.errors.required "> Password is required.</mat-error>
+              <mat-error *ngIf="!password.valid && password.errors.pattern">
+                  Password must contain atleast a special character, 1 uppercase & 1 lowercase letter and 1 numeric value.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <label for="cpassword">Confirm Password</label>
+                <input matInput required minlength="8" maxlength="20" ngModel name="cpassword" type="password"  #cpassword="ngModel">
+                <mat-error *ngIf="cpassword.dirty && cpassword.value !== password.value">Password didn't match !</mat-error>
+                  <mat-error *ngIf="!cpassword.valid && cpassword.errors.minlength ">At least 8 characters are required !</mat-error>
+                  <mat-hint *ngIf="cpassword.dirty && cpassword.value === password.value ">Password matched !</mat-hint>
+              </mat-form-field>
+              <br>
+              <br>
+            <button mat-raised-button color="primary" [disabled]="cpassword.value !== password.value || addFA.form.invalid"> ADD </button>
+  
+          </form>
+        </div>
+        <div class="col-sm-3"></div>
+      </div>
+    </div>
+    </div>
+  </mat-card>
+  </div></div></div></div></mat-sidenav-content>
+  </mat-sidenav-container>

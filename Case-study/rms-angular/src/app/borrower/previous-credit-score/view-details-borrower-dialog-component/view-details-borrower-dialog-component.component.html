@@ -1,0 +1,72 @@
+<div style="width: 500px;">
+    <div style="text-align: right">
+        <button mat-mini-fab color="warn" (click)="close()"> <strong> X </strong>
+            <!-- <mat-icon>cancel</mat-icon> --></button>
+    </div>
+    <div style="text-align: center">
+        <h2 mat-dialog-title>Details of Credit Application</h2>
+    </div>
+    <mat-dialog-content class="mat-typography">
+
+        <mat-card>
+            <div style="text-align: right">
+                Date : <strong> {{dataResponse.date}} </strong>
+            </div>
+            <br>
+            <table>
+
+                <tr>
+                    <td>Application Id </td>
+                    <td> : </td>
+                    <td> <strong> {{dataResponse.applicationId}} </strong> </td>
+                </tr>
+                <tr>
+                    <td>Company Name </td>
+                    <td> : </td>
+                    <td> <strong> {{dataResponse.companyName}} </strong> </td>
+                </tr>
+
+                <tr>
+                    <td>Credit Score </td>
+                    <td> : </td>
+                    <td> <strong> {{dataResponse.creditScore}} </strong> </td>
+                </tr>
+            </table>
+            <br>
+            <div style="text-align: center">
+                    Application Status :
+                    <div *ngIf="dataResponse.applicationStatus =='APPROVED'" style="color: green">
+                      <strong>{{dataResponse.applicationStatus}} </strong>
+                    </div>
+                    <div *ngIf="dataResponse.applicationStatus =='ASSIGNED'" style="color: #3f51b5">
+                      <strong>{{dataResponse.applicationStatus}} </strong>
+                    </div>
+                    <div *ngIf="dataResponse.applicationStatus =='REJECT'" style="color: red">
+                      <strong>{{dataResponse.applicationStatus}}ED </strong>
+                    </div>
+                    <div *ngIf="dataResponse.applicationStatus =='ON HOLD'" style="color: rgb(15, 161, 167)">
+                      <strong>{{dataResponse.applicationStatus}} </strong>
+                    </div>
+                  </div>
+            <br>
+        </mat-card>
+        <br>
+        <mat-card>
+            <h3 style="text-align: center" mat-dialog-title>Details filled by Borrower</h3>
+            <table id="mytable" class="table table-bordred table-striped">
+                <thead>
+                    <th>Policy ID</th>
+                    <th>Policy Name</th>
+                    <th>Value Filled</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let e of dataResponse.policyValues">
+                        <td>{{e.policyId}}</td>
+                        <td>{{e.policyName}}</td>
+                        <td> {{e.policyValue}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-card>
+    </mat-dialog-content>
+</div>

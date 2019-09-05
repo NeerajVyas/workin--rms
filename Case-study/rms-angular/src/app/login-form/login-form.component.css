@@ -1,0 +1,28 @@
+ 
+.blue-snackbar {
+  color: #2196F3;
+}
+
+/* .form-control.ng-touched.ng-invalid{
+    border : 2px solid red;
+  }
+  
+  .form-control.ng-touched.ng-valid{
+    border : 2px solid green;
+  }
+  
+ */
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .mat-success {
+    background-color: white;
+    color:black;
+}

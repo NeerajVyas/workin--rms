@@ -1,0 +1,35 @@
+
+  footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    opacity: .8;
+    padding: 18px;
+   
+ }
+
+    
+    .footerLeft, .footerRight{
+    display: inline-block;
+    }
+    
+    .footerLeft a{
+    color: #bbb;
+    text-decoration: none;
+    font-family: Arial;
+    padding: 5px;
+    }
+    .footerLeft a:hover{
+    color: #fff;
+    }
+    .footerRight{
+    float: right;
+    font-family: Arial;
+    }
+
+    .menu-spacer {
+      flex: 1 1 auto;
+    }

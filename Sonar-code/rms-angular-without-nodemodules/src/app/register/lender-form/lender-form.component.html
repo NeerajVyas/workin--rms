@@ -1,0 +1,272 @@
+<app-app-header></app-app-header>
+
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+      <mat-card class="example-card">
+        <!-- <div class ="text-center"> 
+              <button  mat-raised-button color="success"  disabled routerLink ="/lender-registration"> LENDER </button>
+              &nbsp; &nbsp;
+              <button mat-raised-button color="primary" routerLink ="/borrower-registration"> BORROWER</button>
+            </div> -->
+
+        <button mat-mini-fab color="primary" routerLink="/register-selection">
+          <mat-icon>
+            keyboard_backspace
+          </mat-icon>
+        </button>
+        <br>
+        <div class="text-center">
+          <h4 style="color:#3f51b5"><strong>Lender Registration </strong> </h4>
+        </div>
+        <br>
+        <form id="lender-form" (ngSubmit)="onSubmit()" #lenderForm="ngForm">
+
+          <table>
+            <tr>
+              <td>
+
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <label for="userName">Organization Name </label>
+                    <input matInput required ngModel name="userName" type="text" #userName="ngModel"
+                      [(ngModel)]="lender.userName">
+                    <mat-error *ngIf="!userName.valid && userName.errors.required">
+                      Organization name is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <label for="userEmail">Email </label>
+                    <input matInput required minlength="5" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                      ngModel name="userEmail" type="text" #userEmail="ngModel" [(ngModel)]="lender.userEmail">
+                    <mat-error *ngIf="!userEmail.valid && userEmail.errors.pattern">
+                      Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="!userEmail.valid && userEmail.errors.required">
+                      Email is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <label for="userPassword">Password</label>
+                    <input matInput required minlength="8" maxlength="20"
+                      pattern="^(?=[a-zA-Z0-9!#$%&'()*+,-./:;?@[\]^_`{|}~]{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!#$%&'()*+,-./:;?@[\]^_`{|}~]).*"
+                      ngModel name="userPassword" type="password" #userPassword="ngModel"
+                      [(ngModel)]="lender.userPassword">
+                    <mat-error *ngIf="!userPassword.valid && userPassword.errors.minlength ">At least 8 characters are
+                      required !</mat-error>
+                    <mat-error *ngIf="!userPassword.valid && userPassword.errors.required "> Password is required.
+                    </mat-error>
+                    <mat-error *ngIf="!userPassword.valid && userPassword.errors.pattern">
+                      Password must contain 1 special character, 1 uppercase letter, 1 lowercase letter and 1 numeric
+                      value.
+                    </mat-error>
+
+                  </mat-form-field>
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <label for="cuserPassword">Confirm Password</label>
+                    <input matInput required minlength="8" maxlength="20" ngModel name="cuserPassword" type="password"
+                      #cuserPassword="ngModel">
+                    <mat-error *ngIf="cuserPassword.dirty && cuserPassword.value !== userPassword.value">Password didn't
+                      match !</mat-error>
+                    <mat-error *ngIf="!cuserPassword.valid && cuserPassword.errors.minlength ">At least 8 characters are
+                      required !</mat-error>
+                    <mat-hint *ngIf="cuserPassword.dirty && cuserPassword.value === userPassword.value ">Password
+                      matched !</mat-hint>
+                  </mat-form-field>
+                </div>
+              </td>
+            </tr>
+
+
+
+
+          </table>
+
+          <table>
+            <tr>
+              <td>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <label for="loanInterest">Loan Interest (%)</label>
+                    <input matInput required ngModel name="loanInterest" type="number" min="0"
+                      (keyup)="loanInterestCheck(loanInterest)" #loanInterest="ngModel"
+                      [(ngModel)]="lender.loanInterest">
+                    <mat-error *ngIf="!loanInterest.valid && loanInterest.errors.required">
+                      Loan Interest is <strong>required</strong>
+                    </mat-error>
+                    <mat-hint *ngIf="loanCheck" [ngStyle]="{color: hintColor}">
+                      Loan Interest - in between <strong> 0% - 30%</strong>
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <label for="tenureRange">Tenure Range (in years)</label>
+                    <input matInput required ngModel pattern="^\d{1,2}(-\d{1,2})+$" name="tenureRange"
+                      (keyup)="tenureRangeCheck(tenureRange)" type="text" #tenureRange="ngModel"
+                      [(ngModel)]="lender.tenureRange">
+                    <mat-error *ngIf="!tenureRange.valid && tenureRange.errors.required">
+                      Tenure Range is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="!tenureRange.valid && tenureRange.errors.pattern">
+                      Add Tenure range like <strong>Min - Max (e.g. 1-9)</strong>
+                    </mat-error>
+                    <mat-hint *ngIf="tenureCheck" [ngStyle]="{color: hintColor}">
+                      Min must be less than Max <strong></strong>
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+              </td>
+
+              <td>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <label for="loanAmountRange">Loan Amount Range (Rs.)</label>
+                    <input matInput required ngModel pattern="^\d{1,9}(-\d{1,9})+$" name="loanAmountRange"
+                      (keyup)="amountRangeCheck(loanAmountRange)" type="text" #loanAmountRange="ngModel"
+                      [(ngModel)]="lender.loanAmountRange">
+                    <mat-error *ngIf="!loanAmountRange.valid && loanAmountRange.errors.required">
+                      Loan Amount Range is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="!loanAmountRange.valid && loanAmountRange.errors.pattern">
+                      Add Loan Amount range like <strong>Min - Max (e.g. 100000-300000)</strong>
+                    </mat-error>
+                    <mat-hint *ngIf="amountCheck" [ngStyle]="{color: hintColor}">
+                      Min must be less than Max <strong></strong>
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+              </td>
+            </tr>
+
+          </table>
+          <table>
+            <tr>
+              <td>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <label for="lenderDescription">Description</label>
+                    <textarea rows="2" cols="6" minlength="30" maxlength="120" matInput required ngModel
+                      name="lenderDescription" type="text" #lenderDescription="ngModel"
+                      [(ngModel)]="lender.lenderDescription"></textarea>
+
+                    <mat-error *ngIf="!lenderDescription.valid && lenderDescription.errors.required">
+                      Lender Description is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="!lenderDescription.valid && lenderDescription.errors.minlength"> Atleast 30
+                      Characters
+                      are required</mat-error>
+
+                    <mat-error *ngIf="!lenderDescription.valid && lenderDescription.errors.minlength"> Maximum 120
+                      Characters
+                      are allowed</mat-error>
+                  </mat-form-field>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+
+          <div class="text-center">
+            <a routerLink="/login"> Already Registered ? </a>
+          </div>
+          <br>
+          <div class="text-center">
+            <button mat-raised-button color="primary"
+              [disabled]="cuserPassword.value !== userPassword.value || lenderForm.form.invalid || customValidCheck">
+              REGISTER </button>
+
+          </div>
+          <br>
+
+        </form>
+      </mat-card>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<app-app-footer></app-app-footer>
+
+
+
+
+<!--
+
+    
+  
+
+  
+ 
+    <div class ="form-group">
+            <label for ="lenderDescription">Description</label>
+            <textarea rows="5" cols="6"  
+              required 
+              minlength="20" 
+              maxlength="120" 
+              ngModel
+              name="lenderDescription" 
+              type ="text" 
+              #lenderDescription="ngModel" 
+              [(ngModel)]="lender.lenderDescription"
+              (change)="log(lenderDescription)"
+              class="form-control">
+            </textarea>
+            <div 
+            class="alert alert-danger"  
+            *ngIf="lenderDescription.touched && !lenderDescription.valid" >
+               <div *ngIf="lenderDescription.errors.required " >
+                 Lender Description is required.
+                </div>
+                <div *ngIf="lenderDescription.errors.minlength">
+                        Min Length is 20
+                       </div>
+                       <div *ngIf="lenderDescription.errors.maxlength">
+                            Max Length is 120
+                           </div>
+            </div>
+               
+               
+    </div>
+
+    
+  
+   <br>
+<div class ="text-center">
+<button class=" btn btn-primary btn-center " [disabled]="lenderForm.form.invalid" > REGISTER </button>
+</div>
+</form>
+
+</div>
+</div>
+</div>
+</div>
+<div class = "text-center">
+        <button class=" btn btn-warning btn-center " routerLink ="/login"> Already Registered ? </button>
+</div>
+</div>
+
+<div class ="col-sm-3"></div>
+</div>    
+</div>     -->

@@ -1,0 +1,126 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <!-- <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button> -->
+    <h1>Risk Management System </h1>
+    <span class="menu-spacer"></span>
+    <div>
+     
+      <span style="font-size: 16px;"> Welcome, <strong> {{currentUserName}} </strong> </span>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <strong> Borrower </strong>
+        <mat-icon class="material-icons">
+          account_circle
+        </mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+      <!--   <button mat-menu-item>User Profile</button> -->
+        <label mat-menu-item> {{currentUserEmail}} </label>
+        <button mat-menu-item routerLink="/logout"> Logout </button>
+      </mat-menu>
+    </div>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <!-- <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/borrower-home">Back</a>
+    </mat-nav-list>
+  </mat-sidenav> -->
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3"></div>
+
+          <div class="col-sm-6" >
+            
+            <br>
+            <mat-card *ngIf="policies.length == 0">
+                Wait for Lender to activate the policy.
+              </mat-card>
+            <mat-card>
+
+            <mat-card *ngIf="policies.length > 0">
+            
+     <div style="text-align:left">
+                     
+        <button mat-mini-fab color="primary" routerLink="/borrower-home">
+          <mat-icon>
+            keyboard_backspace
+          </mat-icon>
+        </button>
+      </div>
+      
+        <div class="text-center">
+          <h4 style="color:#3f51b5">Credit Application Form </h4>
+        </div>
+            <!--   <h4>Credit Application Form</h4> -->
+            
+        
+            </mat-card>
+            <br>
+            <mat-card *ngIf="policies.length > 0">
+                <div> 
+                    <label>Terms And Conditions *</label><br>
+                    <label>I am not Bankrupt</label><br>
+                    <label>I agree</label>&nbsp;&nbsp;&nbsp;&nbsp;
+  
+                    <mat-checkbox color="warn" ngModel  name="terms" #terms="ngModel" [(ngModel)]="disabled">
+                      
+                    </mat-checkbox>
+                    <br>
+                    <mat-hint *ngIf="!disabled" [ngStyle]="{color : hintColor}" > If you are Bankrupt you can't proceed</mat-hint>
+                    <mat-hint *ngIf="disabled"> You can proceed now.</mat-hint>
+                    <br>  
+                  </div>
+              <form id="credit-app-form" (ngSubmit)="onSubmit()" #creditappForm="ngForm">
+                <br>
+             
+           
+
+                <div *ngFor="let policy of policies; let i = index">
+                  <mat-form-field class="example-full-width">
+                    <label for="policyName">{{policy.policyName}}</label>
+
+                    <input matInput type="number" required ngModel name="{{policy.policyId}}" #{{policy.policyId}}="ngModel"   (blur)="editvalue(i,$event,policy.policyId)"
+                      [disabled]="!disabled" > 
+                       <mat-error *ngIf="creditappForm.form.invalid">{{ policy.policyName }} is required.</mat-error>   
+                  </mat-form-field>
+                  <br>
+                </div>
+
+                <mat-form-field class="example-full-width">
+                  <label for="companyName">Company Name</label>
+
+
+
+                  <input matInput ngModel name="companyName" type="text" #companyName="ngModel"
+                    [(ngModel)]="creditApp.companyName" required [disabled]="!disabled">
+                      <mat-error *ngIf="!companyName.valid && companyName.errors.required "> Company Name is required.</mat-error> 
+
+                </mat-form-field>
+                <br>
+
+              
+                <div style="text-align: center">
+                <button mat-raised-button color="primary" [disabled]="!disabled || creditappForm.form.invalid">Submit</button>
+                </div>
+              </form>
+              <br>
+              
+            </mat-card>
+          </mat-card>
+          </div>
+
+          <div class="col-sm-3"></div>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

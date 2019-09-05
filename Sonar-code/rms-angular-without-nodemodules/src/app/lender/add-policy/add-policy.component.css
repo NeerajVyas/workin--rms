@@ -1,0 +1,36 @@
+
+
+.menu-spacer {
+    flex: 1 1 auto;
+  }
+toggle-button{
+    margin: 0%;
+}
+
+table{
+    width: 100%;
+}
+
+td{
+    padding:0 20px 0 20px;
+}
+ 
+.example-full-width {
+    width: 100%;
+  }
+
+/* 
+.mat-slide-toggle.mat-checked.mat-slide-toggle-bar-success {
+    background-color: green;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb-success{
+    background-color: green;
+}
+ */
+/* 
+.mat-slide-toggle.mat-checked.mat-slide-toggle-bar */
+
+/* .example-margin{
+background-color: yellow;
+} */

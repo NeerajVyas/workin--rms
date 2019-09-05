@@ -1,0 +1,31 @@
+table{
+    width: 100%;
+}
+/* 
+.mat-successRight{
+    background-color: green;
+}
+.mat-successCancel{
+    background-color: red;
+}
+ */
+
+.green-icon {
+    color: green;
+}
+/* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
+.green-icon svg {
+    fill: white;
+}
+
+.red-icon {
+    color: red;
+}
+/* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
+.red-icon svg {
+    fill: white;
+}
+
+.menu-spacer {
+    flex: 1 1 auto;
+  }

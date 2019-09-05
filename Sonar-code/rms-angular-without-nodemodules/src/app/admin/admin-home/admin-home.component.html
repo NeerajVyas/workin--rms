@@ -1,0 +1,134 @@
+
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <h1>Risk Management System </h1>
+    <span class="menu-spacer"></span>
+    <div>
+
+      <span style="font-size: 16px;"> Welcome, <strong> {{currentUserName}} </strong> </span>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <strong> ADMIN </strong>
+        <mat-icon class="material-icons">
+          account_circle
+        </mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <!-- 
+     <button mat-menu-item >User Profile</button> -->
+        <label mat-menu-item> {{currentUserEmail}} </label>
+        <button mat-menu-item routerLink="/logout"> Logout </button>
+      </mat-menu>
+    </div>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+
+      <a mat-list-item routerLink="/admin-home"> Home </a>
+      <a mat-list-item routerLink="/view-active-lenders"> View Active Lenders </a>
+      <a mat-list-item routerLink="/view-inactive-lenders"> View Inactive Lenders </a>
+      <a mat-list-item routerLink="/view-active-borrowers"> View Active Borrowers </a>
+      <a mat-list-item routerLink="/view-inactive-borrowers"> View Inactive Borrowers </a>
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+     <!--    <div class="mat-elevation-z8">
+
+            <mat-card style="text-align: center">
+              <h4 style="color:black">Admin Task
+                <mat-icon matTooltip="You can Activate and Deactivate lenders and borrowers">
+                  info
+                </mat-icon>
+              </h4>
+
+            </mat-card>
+    
+          </div>
+          <hr> -->
+    
+    
+    
+    
+          <mat-grid-list cols="13" rowHeight="100px">
+            <mat-grid-tile [colspan]=3 [rowspan]=6>
+              <img src="./../../assets/user.png" height="80%" width="80%" alt="user">
+    
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]=5 [rowspan]=6>
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Activate - Deactivate Lenders</mat-card-title>
+                  <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                </mat-card-header>
+                <div style="text-align: center">
+                <img src="./../../assets/setting.png"  height="60%" width="60%" alt="Applications">
+                </div>
+                <mat-card-content>
+                  
+                  <div style="text-align: center">
+                      <p>
+                          You can Activate or Deactivate the lenders.
+                          </p>
+                    <button mat-raised-button color="primary" class="hover-button"  routerLink="/view-active-lenders">  Active Lenders </button>
+                    <br>
+                    <br> 
+                    <h5><span>OR</span></h5>
+                    <br>
+                    <button mat-raised-button color="primary" class="hover-button" routerLink="/view-inactive-lenders"> Inactive Lenders </button>
+                    <br>
+                  </div>
+                 
+                </mat-card-content>
+                <mat-card-actions>
+                  <!--    <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button> -->
+                </mat-card-actions>
+              </mat-card>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]=5 [rowspan]=6>
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Activate - Deactivate borrowers</mat-card-title>
+                  <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                </mat-card-header>
+                <div style="text-align: center">
+                <img  src="./../../assets/setting.png" height="60%" width="60%" alt="Applications">
+                </div>
+                <mat-card-content>
+                  
+                    <div style="text-align: center">
+                        <p>
+                            You can Activate or Deactivate the borrowers.
+                          </p>
+                      <button mat-raised-button color="primary" class="hover-button" routerLink="/view-active-borrowers"> Active Borrowers </button>
+                      <br>
+                      <br> 
+                      <h5><span>OR</span></h5>
+                      <br>
+                      <button mat-raised-button color="primary" class="hover-button" routerLink="/view-inactive-borrowers"> Inactive Borrowers </button>
+                      <br>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                  <!--    <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button> -->
+                </mat-card-actions>
+              </mat-card>
+            </mat-grid-tile>
+            <!--  <mat-grid-tile>4</mat-grid-tile> -->
+          </mat-grid-list>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

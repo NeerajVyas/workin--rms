@@ -1,0 +1,17 @@
+table {
+    width: 100%;
+  }
+
+mat-header-cell.mat-sort-header-sorted {
+    color: black;
+  }
+
+  .menu-spacer {
+    flex: 1 1 auto;
+  }
+
+  .customWidthClass{
+
+    flex: 0 0 275px;
+    
+    }

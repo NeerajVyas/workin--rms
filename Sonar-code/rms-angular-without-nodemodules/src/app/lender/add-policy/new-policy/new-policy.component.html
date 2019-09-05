@@ -1,0 +1,154 @@
+<mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <button mat-icon-button>
+            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+          </button>
+          <h1>Risk Management System </h1>
+          <span class="menu-spacer"></span>
+          <div>
+      
+            <span style="font-size: 16px;"> Welcome, <strong> {{currentUserName}} </strong> </span>
+            <button mat-button [matMenuTriggerFor]="menu">
+              <strong> Lender </strong>
+              <mat-icon class="material-icons">
+                account_circle
+              </mat-icon>
+            </button>
+            <mat-menu #menu="matMenu"><!-- 
+              <button mat-menu-item>User Profile</button> -->
+              <label mat-menu-item> {{currentUserEmail}} </label>
+              <button mat-menu-item routerLink="/logout"> Logout </button>
+            </mat-menu>
+          </div>
+      
+        </mat-toolbar-row>
+      
+      </mat-toolbar>
+      <mat-sidenav-container>
+        <mat-sidenav #sidenav>
+          <mat-nav-list>
+            <a mat-list-item routerLink="/lender-home"> Home</a>
+            <a mat-list-item routerLink="/view-credit-app"> Application Requests</a>
+            <a mat-list-item routerLink="/new-policy"> Add Parameter in Policy </a>
+            <a mat-list-item routerLink="/add-policy"> Setup Policy </a>
+            <a mat-list-item routerLink="/view-policy"> View Policy </a>
+            <a mat-list-item routerLink="/add-financial-analyst"> Add Financial Analyst</a>
+            <a mat-list-item routerLink="/view-fa"> View Financial Analyst </a>
+      
+          <!--   <a mat-list-item (click)="sidenav.toggle()" mat-list-item>Close</a>
+       -->
+          </mat-nav-list>
+      
+        </mat-sidenav>
+        <mat-sidenav-content>
+          <div style="height: 88vh;">
+      
+            <div class="container">
+              <br>
+              <div class="row">
+      
+                <div class="col-sm-12">
+<mat-card>
+        <div class="mat-elevation-z8" style ="text-align: center" >
+                <div class="mat-toolbar-tools search-bar">
+                    
+               
+      <br>
+      <h4 style="color:#3f51b5"> Add Custom Policy
+                  <mat-icon matTooltip="set threshold and Weightage accordingly.">
+                            info
+                    </mat-icon>
+                </h4>
+                <br>
+      
+      
+      
+      
+      </div>
+      </div>
+      
+      <br>
+
+
+                <div class="mat-elevation-z8" style ="text-align: center" >
+        <div class="container">
+                <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-6">
+            
+                <form #newpolicyForm="ngForm" (ngSubmit)="onSubmit()">
+
+
+                        <mat-form-field class="example-full-width">
+                                <label for="policyname">Policy Name</label>
+                                <input matInput required  maxlength="20" ngModel name="policyname" type="text" #policyname="ngModel"   [(ngModel)]="policy.policyName">
+                                 
+                                   <mat-error *ngIf="!policyname.valid && policyname.errors.required "> Policy name is required.</mat-error> 
+                                </mat-form-field>  
+
+                        <mat-form-field class="example-full-width">
+                                <label for="threshold">Threshold</label>
+                                <input matInput required  ngModel name="threshold" type="number" min="0"  #threshold="ngModel"   oninput="validity.valid||(value='');"   [(ngModel)]="policy.threshold">
+                                <mat-error *ngIf="!threshold.valid && threshold.errors.required "> Threshold is required.</mat-error>
+                                </mat-form-field>  
+                                <mat-form-field class="example-full-width">
+                                        <label for="weightage">Weightage (0-100)</label>
+                                        <input matInput required ngModel name="weightage" type="number"  min="0" max="100" #weightage="ngModel" oninput="validity.valid||(value='');"   [(ngModel)]="policy.policyWeightage" >
+                                        <mat-error *ngIf="!weightage.valid && weightage.errors.required "> Weightage is required.</mat-error>
+                                        </mat-form-field> 
+                    <!-- <p>Policy Name</p>
+                        <input type="text" 
+                        class="form-control"
+                        [(ngModel)]="policy.policyName"
+                        name="policy-name"  placeholder="Enter your policy name" size="35">
+                        <br>
+                        <p>Threshold</p>
+                        <input type="text" 
+                        class="form-control" 
+                        [(ngModel)]="policy.threshold"
+                        name="threshold"  placeholder="Enter threshold of policy" size="35">
+                        <br>
+
+                         <p>Weightage</p>
+                        <input type="text" 
+                        class="form-control"
+                        [(ngModel)]="policy.policyWeightage" 
+                        name="weightage"  placeholder="Enter weightage of policy">     
+                    -->
+                    
+
+                       <br> <button mat-raised-button color="primary" [disabled]="!newpolicyForm.valid">ADD</button>
+
+                       <br>
+                       <br>
+</form>
+</div>
+<div class="col-sm-3"></div>
+</div></div>
+                </div>
+
+
+<br>
+<!-- <div class="mat-elevation-z8" style ="text-align: center" >
+                <div class="mat-toolbar-tools search-bar">
+                    
+               
+      <br>
+      <pre> 
+        Example :
+        Policy Name      : Family Income   any Name
+        Policy Threshold : 100000      Value
+        Policy Weightage : 80          (0-100)
+
+      </pre>
+                <br>
+      
+      
+      
+      
+      </div>
+      </div>
+      
+      <br> -->
+</mat-card>
+</div></div></div></div></mat-sidenav-content></mat-sidenav-container>

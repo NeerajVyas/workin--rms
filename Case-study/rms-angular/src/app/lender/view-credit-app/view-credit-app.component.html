@@ -1,0 +1,152 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <h1>Risk Management System </h1>
+    <span class="menu-spacer"></span>
+    <div>
+
+      <span style="font-size: 16px;"> Welcome, <strong> {{currentUserName}} </strong> </span>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <strong> Lender </strong>
+        <mat-icon class="material-icons">
+          account_circle
+        </mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <!-- 
+        <button mat-menu-item>User Profile</button> -->
+        <label mat-menu-item> {{currentUserEmail}} </label>
+        <button mat-menu-item routerLink="/logout"> Logout </button>
+      </mat-menu>
+    </div>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/lender-home"> Home</a>
+      <a mat-list-item routerLink="/view-credit-app"> Application Requests</a>
+      <a mat-list-item routerLink="/new-policy"> Add Parameter in Policy </a>
+      <a mat-list-item routerLink="/add-policy"> Setup Policy </a>
+      <a mat-list-item routerLink="/view-policy"> View Policy </a>
+      <a mat-list-item routerLink="/add-financial-analyst"> Add Financial Analyst</a>
+      <a mat-list-item routerLink="/view-fa"> View Financial Analyst </a>
+
+      <!--   <a mat-list-item (click)="sidenav.toggle()" mat-list-item>Close</a>
+ -->
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+
+      <div class="container">
+        <br>
+        <div class="row">
+
+          <div class="col-sm-12">
+            <mat-card>
+              <div class="mat-elevation-z8" style="text-align: center">
+                <div class="mat-toolbar-tools search-bar">
+
+
+                  <br>
+                  <h4 style="color:#3f51b5">Credit Applications Received
+                    <mat-icon matTooltip="Assign the ON HOLD credit applications to financial analyst.">
+                      info
+                    </mat-icon>
+                  </h4>
+                  <br>
+
+
+
+
+                </div>
+              </div>
+
+              <br>
+
+              <div class="mat-elevation-z8">
+
+                <div class="mat-toolbar-tools search-bar">
+                  <button mat-button class="mat-icon-button">
+                    <mat-icon>search</mat-icon>
+                  </button>
+
+                  <mat-form-field flex>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+                  </mat-form-field>
+                </div>
+
+                <br>
+                <table mat-table [dataSource]="creditAppDataSource" matSort>
+
+                  <ng-container matColumnDef="applicationId">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Application Number </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.applicationId}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="companyName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Company Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.companyName}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="creditScore">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Credit Score </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.creditScore}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="applicationStatus">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Application Status </mat-header-cell>
+
+                    <mat-cell *matCellDef="let element">{{element.applicationStatus}}
+                    </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="creationDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
+
+                    <mat-cell *matCellDef="let element">{{element.creationDate}}
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="viewDetails">
+                      <mat-header-cell *matHeaderCellDef> View Details </mat-header-cell>
+  
+                      <mat-cell *matCellDef="let element">
+                        <button mat-raised-button color="primary" (click)="openDialog(element)">
+                          View Details </button>
+                      </mat-cell>
+  
+                    </ng-container>
+                    
+                  <ng-container matColumnDef="assign">
+                    <mat-header-cell *matHeaderCellDef> Assign </mat-header-cell>
+
+                    <mat-cell *matCellDef="let element">
+                      <div *ngIf="element.applicationStatus == 'ON HOLD'">
+                        <button mat-raised-button color="primary"
+                          (click)="openModal(element.applicationId,element.financialAnalystId,element.borrowerId,element.applicationStatus )">
+                          Assign </button>
+                      </div>
+                    </mat-cell>
+
+                  </ng-container>
+
+               
+
+                  <mat-header-row *matHeaderRowDef="creditAppColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: creditAppColumns;"></mat-row>
+
+                </table>
+                <mat-paginator [pageSizeOptions]="[10,15, 20]" showFirstLastButtons></mat-paginator>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

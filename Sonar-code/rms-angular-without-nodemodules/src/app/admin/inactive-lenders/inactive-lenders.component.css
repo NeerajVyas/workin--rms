@@ -1,0 +1,19 @@
+table{width: 100%}
+
+.mat-activeButton{
+    background-color: green;
+    color: white;
+}
+
+.menu-spacer {
+    flex: 1 1 auto;
+  }
+
+  .make-red{
+    background-color :rgb(255, 190, 190);
+  }
+  .customWidthClass{
+
+    flex: 0 0 275px;
+    
+    }

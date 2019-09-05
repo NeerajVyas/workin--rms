@@ -1,0 +1,97 @@
+<div style="text-align: center">
+  <h2 mat-dialog-title>Details of Credit Application</h2>
+  <mat-dialog-content class="mat-typography">
+    <!--    <div *ngFor="let policy of policyId; let i=index">
+        {{i}}
+  
+      </div>
+  --> 
+  Application Id :  APP{{dataResponse.applicationNumber}} <br>
+      Credit Score : {{dataResponse.applicationCreditScore}} 
+      
+      <br><br>
+      <div style="text-align: left">
+    
+      <!-- Policy Name :
+      {{dataResponse.policyNamebyLender}}
+      <br>
+      Policy Threshold :
+      {{dataResponse.policyThresholdbyLender}}
+      <br>
+      Policy Value Filled By Borrower :
+      {{dataResponse.policyValuebyBorrower}}
+      <br>
+      Policy Weightage :
+      {{dataResponse.policyWeightagebyLender}} -->
+  
+      <!-- <div ng-repeat="user in _users | filter:{User.active:1}">
+          {{user.User.userid}}
+  </div> -->
+  <table id="mytable" class="table table-bordred table-striped">
+      <thead>
+  
+  
+        <th>Policy ID</th>
+        <th> Policy Name</th>
+        <th>Policy Threshold</th>
+        <th>Policy Value Filled By Borrower</th>
+        <th>Policy Weightage</th> 
+      </thead>
+      <tbody>
+           
+              <tr *ngFor="let e of datasource">
+                <td>{{e.policyId}}</td>
+                <td>{{e.policyName}}</td>
+               
+             
+                <td>{{e.threshold}}</td>
+                <td>{{e.valueborrower}}</td>
+                <td>{{e.weighage}}</td>
+              </tr>
+            
+      </tbody>
+    </table> 
+     <!--  <table>
+        <div *ngFor="let e of datasource">
+        <tr >
+          <td>{{e.policyId}}</td>
+          <td>{{e.policyName}}</td>
+          <td>{{e.policyName}}</td>
+          <td>{{e.valueborrower}}</td>
+          <td>{{e.threshold}}</td>
+          <td>{{e.weighage}}</td>
+        </tr>
+      </div>
+      </table> -->
+      
+     
+    </div>
+  
+  </mat-dialog-content>
+  <div style="text-align: center">
+      <mat-card>
+      <form  (submit)="updateCreditStatus($event)">
+          <mat-form-field>
+              <mat-label>Approve Or Reject</mat-label>
+              <mat-select  [(value)]="selected" (selectionChange)="onSelect($event)">
+                <mat-option  value="Approve">
+                  Approve
+                </mat-option>
+                <mat-option  value ="Reject">
+                 Reject
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+    
+      <input type="hidden" value="{{dataResponse.applicationNumber}}">
+      <input type="hidden" value="{{dataResponse.borrowerEmail}}">
+      <input type="hidden"  value="{{dataResponse.lenderEmail}}">
+            <br>
+      <button  mat-raised-button [color]="'success'" >Update</button>
+    </form>
+  <br>
+    <button  mat-raised-button color="warn"  (click)="close()">Cancel</button>
+     </mat-card>
+    
+  </div>
+  </div>

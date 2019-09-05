@@ -1,0 +1,16 @@
+.menu-spacer {
+  flex: 1 1 auto;
+}
+
+.example-card {
+  max-width: 370px;
+}
+.example-header-image {
+  background-image: url('./../../../assets/lender-borrower-logo.png');
+  background-size: cover;
+}
+
+.example-card:hover{
+  box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.8);
+  cursor: pointer;
+}

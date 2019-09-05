@@ -1,0 +1,158 @@
+<!--
+    <app-financial-analyst-sidebar></app-financial-analyst-sidebar>
+-->
+
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <h1>Risk Management System </h1>
+    <span class="menu-spacer"></span>
+    <div>
+
+      <span style="font-size: 16px;"> Welcome, <strong> {{currentUserName}} </strong> </span>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <strong> ADMIN </strong>
+        <mat-icon class="material-icons">
+          account_circle
+        </mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <!-- 
+       <button mat-menu-item >User Profile</button> -->
+        <label mat-menu-item> {{currentUserEmail}} </label>
+        <button mat-menu-item routerLink="/logout"> Logout </button>
+      </mat-menu>
+    </div>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+
+      <a mat-list-item routerLink="/admin-home"> Home </a>
+      <a mat-list-item routerLink="/view-active-lenders"> View Active Lenders </a>
+      <a mat-list-item routerLink="/view-inactive-lenders"> View Inactive Lenders </a>
+      <a mat-list-item routerLink="/view-active-borrowers"> View Active Borrowers </a>
+      <a mat-list-item routerLink="/view-inactive-borrowers"> View Inactive Borrowers </a>
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+
+
+
+
+      <mat-card>
+        <div class="mat-elevation-z8" style="text-align: center">
+          <br>
+          <h4 style="color:#3f51b5">Inactive Lenders <mat-icon matTooltip="List of Inactive Lenders">
+              info
+            </mat-icon>
+
+          </h4>
+          <br>
+
+        </div>
+
+        <h4></h4>
+        <br>
+        <div class="mat-elevation-z8">
+
+          <div class="mat-toolbar-tools search-bar">
+            <button mat-button class="mat-icon-button">
+              <mat-icon>search</mat-icon>
+            </button>
+
+            <mat-form-field flex>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+            </mat-form-field>
+          </div>
+
+          <br>
+          <table mat-table [dataSource]="inactiveLenderDataSource" matSort>
+
+            <ng-container matColumnDef="lenderId">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Lender Id </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.lenderId}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="lenderName">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Lender's Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.lenderName}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="lenderEmail">
+              <mat-header-cell *matHeaderCellDef [ngClass]="'customWidthClass'" mat-sort-header> Email </mat-header-cell>
+              <mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'"> {{element.lenderEmail}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="loanInterest">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Loan Interest </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.loanInterest}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="tenureRange">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Tenure Range </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.tenureRange}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="lenderAmountRange">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Loan Amount Range </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.lenderAmountRange}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="numberOfApplicationRequests">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> No. Of Application Requests </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.numberOfApplicationRequests}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="numberOfFinancialAnalyst">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> No. Of FA </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.numberOfFinancialAnalyst}} </mat-cell>
+            </ng-container>
+           <!--  <ng-container matColumnDef="viewFA">
+              <mat-header-cell *matHeaderCellDef> View Financial Analyst </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+
+                <button mat-raised-button color="primary"
+                  (click)="openModal(element.applicationId,element.financialAnalystId,element.borrowerId,element.applicationStatus )">
+                  View Details </button>
+
+              </mat-cell>
+
+            </ng-container> -->
+            <!--   <ng-container matColumnDef="lenderActiveInactivestate">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header>  Status</mat-header-cell>
+                                  <mat-cell *matCellDef="let element"> {{element.lenderActiveInactivestate}} </mat-cell>
+                                </ng-container> -->
+            <ng-container matColumnDef="update">
+              <mat-header-cell *matHeaderCellDef> Update Status</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <button mat-raised-button [color]="'activeButton'" (click)="inactiveLender(element.lenderId)">
+                  Activate </button>
+              </mat-cell>
+            </ng-container>
+
+
+
+
+            <mat-header-row *matHeaderRowDef="inactiveLenderColumns"></mat-header-row>
+            <div *ngIf="!rowRed">
+              <mat-row *matRowDef="let row; columns: inactiveLenderColumns;"></mat-row>
+              </div>
+              
+              <div *ngIf="rowRed">
+              <mat-row [ngClass]="{'make-red': row.lenderId == lastlyDeactivated}"  *matRowDef="let row; columns: inactiveLenderColumns;"></mat-row>
+              </div>
+              
+          <!--   <mat-row *matRowDef="let row; columns: inactiveLenderColumns;"></mat-row>
+ -->
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </mat-card>
+
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
